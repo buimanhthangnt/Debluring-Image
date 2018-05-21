@@ -58,6 +58,7 @@ class AutoEncoderDecoder:
                         batch_size=32,
                         shuffle=True,
                         validation_data=(x_test, y_test))
+        self.model.save('weights.h5')
 
 
     def load_weights(self, path='weights.h5'):
