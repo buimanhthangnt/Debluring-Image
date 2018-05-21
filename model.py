@@ -69,7 +69,7 @@ class AutoEncoderDecoder:
         for image in os.listdir(folder):
             image = cv.imread(os.path.join(folder, image))
             origin = resize(image, 56, 46)
-            blur = cv.GaussianBlur(origin, (5,5), 0)
+            blur = cv.GaussianBlur(origin, (7,7), 0)
             blur = blur.reshape((1, blur.shape[0], blur.shape[1], 1))
             delur_img = self.model.predict(blur)
             compare([blur, delur_img, origin])
