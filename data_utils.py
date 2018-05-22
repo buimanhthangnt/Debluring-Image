@@ -75,3 +75,8 @@ def get_data():
 
         return x_train, x_test, y_train, y_test
 
+
+def write_images():
+    dataset = read_face_dataset(1, 41)
+    for idx, image in enumerate(dataset):
+        cv.imwrite('images/' + str(idx) + '.jpg', image)
