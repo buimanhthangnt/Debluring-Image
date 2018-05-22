@@ -3,6 +3,7 @@ from keras.layers import Conv2D, Input, Deconv2D, Add
 from data_utils import get_data
 import os
 import cv2 as cv
+import numpy as np
 from visualize import resize, compare
 
 class AutoEncoderDecoder:
@@ -74,3 +75,13 @@ class AutoEncoderDecoder:
             blur = blur.reshape((1, blur.shape[0], blur.shape[1], 1))
             delur_img = self.model.predict(blur)
             compare([blur, delur_img, origin])
+
+
+    def test(self, num_test=5):
+        x_train, x_test, y_train, y_test = get_data()
+        rand = np.random.randint(low=0, high=x_test.shape[0], size=num_test)
+        x_test = x_test[rand]
+        y_test = y_test[rand]
+        predicts = self.model.predict(x_test)
+        for i in range(num_test):
+            compare([x_test[i], predicts[i], y_test[i]])

@@ -7,8 +7,10 @@ import cv2 as cv
 
 def compare(list_image):
     for i, image in enumerate(list_image):
-        if i == 2: continue
-        list_image[i] = image.reshape((image.shape[1], image.shape[2]))
+        if len(image.shape) == 4:
+            list_image[i] = image.reshape((image.shape[1], image.shape[2]))
+        elif len(image.shape) == 3:
+            list_image[i] = image.reshape((image.shape[0], image.shape[1]))
 
     fig = plt.figure(figsize=(10, 5))
     num_col = 3
